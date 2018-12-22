@@ -12,7 +12,7 @@ class SubscriptionController extends Controller
         $plan = Plan::findOrFail($request->get('plan'));
 
         $request->user()
-            ->newSubscription('main',$plan->stripe->striple_plan)
+            ->newSubscription('main',$plan->stripe_plan)
             ->create($request->stripeToken);
 
         return redirect()->route('home')->with('success', 'Your plan subscribed successfully');
