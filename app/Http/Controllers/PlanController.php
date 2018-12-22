@@ -16,6 +16,10 @@ class PlanController extends Controller
 
     public function show(Plan $plan, Request $request)
     {
+        if ($request->user()->subscribedToPlan($plan->stripe_plan,'main'))
+        {
+            return redirect()->route('home')->with('Success', 'You have already subscribed the plan');
+        }
         return view('plans.show', compact('plan'));
     }
 }
